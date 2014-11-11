@@ -27,7 +27,7 @@ func (glogr glogrus) ServeHTTP(resp http.ResponseWriter, req *http.Request) {
 		"uri":    req.RequestURI,
 		"method": req.Method,
 		"remote": req.RemoteAddr,
-	}).Info("req_start")
+	}).Info("New request incoming")
 	lresp := wrapWriter(resp)
 
 	glogr.h.ServeHTTP(lresp, req)
@@ -43,7 +43,7 @@ func (glogr glogrus) ServeHTTP(resp http.ResponseWriter, req *http.Request) {
 		"remote":  req.RemoteAddr,
 		"latency": fmt.Sprintf("%6.4f ms", latency),
 		"app":     glogr.name,
-	}).Info("req_served")
+	}).Info("Finished serving the request")
 }
 
 // NewGlogrus allows you to configure a goji middleware that logs all requests and responses
