@@ -1,6 +1,8 @@
 package glogrus
 
 import (
+	"bufio"
+	"net"
 	"net/http"
 )
 
@@ -55,4 +57,14 @@ func (b *basicWriter) status() int {
 // unwrap returns the original http.ResponseWriter
 func (b *basicWriter) Unwrap() http.ResponseWriter {
 	return b.ResponseWriter
+}
+
+// Flush is used for the implementation of http.Flusher
+func (b *basicWriter) Flush() {
+	b.ResponseWriter.(http.Flusher).Flush()
+}
+
+// Hijack is used for the implementation of http.Hijacker
+func (b *basicWriter) Hijack() (net.Conn, *bufio.ReadWriter, error) {
+	return b.ResponseWriter.(http.Hijacker).Hijack()
 }
