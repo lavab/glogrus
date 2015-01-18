@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/lavab/logrus"
+	"github.com/Sirupsen/logrus"
 	"github.com/zenazn/goji/web"
 	"github.com/zenazn/goji/web/middleware"
 )
